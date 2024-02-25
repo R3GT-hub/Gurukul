@@ -4,6 +4,7 @@ const  cookieParser=require('cookie-parser');
 const mongoose=require("mongoose");
 const userRoute=require('./routes/user');
 const blogRoute=require('./routes/blog');
+const resourceRoute=require('./routes/resources');
 
 const { checkForAuthenticationCookie } = require("./middleware/authentication");
 const app=express();
@@ -33,5 +34,6 @@ app.get('/', async (req, res) => {
 });
 app.use('/user',userRoute);
 app.use('/blog',blogRoute);
+app.use('/resource',resourceRoute);
 
 app.listen(PORT,()=>console.log('server started at port 8000'));

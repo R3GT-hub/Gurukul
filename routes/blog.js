@@ -18,6 +18,7 @@ const upload = multer({ dest: path.resolve(`./public/uploads`) })
 // const upload = multer({ storage: storage });
 
 router.get("/add-new", (req, res) => {
+    
     res.render('addblog', {
         user: req.user,
     });
