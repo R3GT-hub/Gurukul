@@ -9,6 +9,11 @@ const blogSchema = new Schema({
         type: String,
         required: true
     },
+    expireAt: {
+        type: Date,
+        default: Date.now, // Set a default value for the field
+        index: { expires: '5d' }, // Set TTL index to expire documents after 1 day
+    },
     jobLink:{
         type:String,
         required:true

@@ -7,48 +7,141 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Madimi+One&family=Montserrat:wght@300;400;800&family=Playpen+Sans:wght@300&family=Poppins:wght@500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Montserrat:wght@300;400;800&family=Playpen+Sans:wght@300&family=Poppins:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        /* Custom styles */
+        body{
+            font-family:"Madimi One";
+        }
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease-in-out;
+            display: flex; /* Use flexbox */
+            flex-direction: column; /* Align items vertically */
+            height: 100%; /* Ensure cards take full height of their container */
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-img-top {
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            /* object-fit: cover; */
+            height: 200px; /* Adjusted height for the images */
+            width: 100%; /* Ensure the image takes the full width of the card */
+        }
+
+        .card-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 10px; /* Add some margin below the title */
+        }
+
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Space out content vertically */
+            flex-grow: 1; /* Allow body to grow within the card */
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+        .btnbanner{
+             padding: 10px;
+             /* background-color: #7250af; */
+             background-color: #007bff;
+             color: white;
+             margin: 20px;
+             border-radius: 10px;
+             border: none;
+        }
+        .btnbanner:hover{
+            color:#007bff ;
+            background-color: white;
+            border: 1px solid #007bff;
+        }
+    </style>
 </head>
 <body>
-<style>
-  .cardimg{
-    width: 80%;
-    height: 200px; /* Default height for all screen sizes */
-    /* margin: 10px auto; */
-    padding: 10px;
-    margin: 0 auto;
-  }
+    <!-- Navbar -->
+    <%-include('./partials/nav')%> 
+
+    <div class="container mt-5">
+        <% if (user && user.fullName) { %>
+            <h1 class="mb-4" style="font-weight: 600; font-family: Madimi One;">Welcome,<span style="color:#007bff"> <%= user.fullName %> </span>!</h1>
+            <div style="display: flex; justify-content: space-between; flex-wrap: wrap; margin-bottom: 30px">
+                <div><img src="https://www.proelevate.in/assets/Common/Archive1.svg" width="200px" height="200px" alt=""></div>
+                <div><img src="https://www.proelevate.in/assets/Common/Archive2.svg" width="200px" height="200px" alt=""></div>
+                <div><img src="https://www.proelevate.in/assets/Common/Archive3.svg" width="200px" height="200px" alt=""></div>
+                <div><img src="https://www.proelevate.in/assets/Common/Archive4.svg" width="200px" height="200px" alt=""></div>
 
 
-  .col:hover{
-      scale: 1.01;
-      transition-duration: 0.5s;
-  }
-</style>
-<%-include('./partials/nav')%> 
-<div class="container mt-3">
-  <% if (user && user.fullName) { %>
-      <h1 style="font-weight: 600;"><%= user.fullName %>'s Opportunities</h1>
-  <% } %>
-
-  <% if (locals.user) { %>
-    <div class="row row-cols-1 row-cols-lg-3 row-cols-md-2 g-3"> <!-- Adjusted grid layout -->
-      
-      <% blogs.reverse().forEach(blog => { %>
-        <div class="col mb-3">
-          <div class="card mt-3">
-            <img src="<%= blog.coverImageURL %>" class="card-img-top cardimg " alt="...">
-            <hr>
-            <div class="card-body">
-              <h5 class="card-title"><%= blog.title %></h5>
-              <a href="/blog/<%= blog._id %>" class="btn btn-primary">View</a>
             </div>
-          </div>
-        </div>
-      <% }) %>
+            <div>
+                <div style="text-align: center; padding: 40px; margin-top: 40px;margin-bottom: 40px; background: -webkit-linear-gradient(#212130, #39304A);color: whitesmoke; border-radius: 20px; font-family: Madimi One;" >
+                <h3 style="color: rgba(175, 183, 223, 0.579);">Embrace the Code Master Within</h3>
+                <h1>"Embark on a coding journey with <span style="color:#007bff"> Gurukul! </span> Explore a wealth of coding resources and exciting internship opportunities to fuel your passion and propel your career forward. Let's unlock the doors to endless possibilities together!"</h1>
+            </div>
+            </div>
+        <% } else { %>
+            <div style=" padding: 30px; ; text-align: center; display: flex; justify-content: space-around;">
+                <img  src="https://www.proelevate.in/assets/Home/Discover3.svg" alt="">
+                <div style="width: 600px;">
+                <h1>Discover your path to success </h1>
+                <h2>Unlock a world of possibilities, from online challenges to showcasing your skills. Build your portfolio and enhance your CV with <span style="color: #007bff; "> <h1> Gurukul's</h1> </span> diverse opportunities.</h2>
+                <div>
+                <a class="btnbannerlink" href="/user/signin"><button class="btnbanner"> Get Started</button></a>
+                <a class="btnbannerlink" href="/user/signin"><button class="btnbanner"> Find Internships</button></a>
+            </div>
+
+            </div>
+            
+            </div>
+            <div style="display: flex; justify-content: space-between; flex-wrap: wrap; margin-bottom: 30px">
+                <div><img src="https://www.proelevate.in/assets/Home/Discover1.svg" width="200px" height="200px" alt=""></div>
+                <div><img src="https://www.proelevate.in/assets/Home/Discover2.svg" width="200px" height="200px" alt=""></div>
+                <div><img src="https://www.proelevate.in/assets/Home/Archive3.svg" width="200px" height="200px" alt=""></div>
+                <div><img src="https://www.proelevate.in/assets/Home/Discover4.svg" width="200px" height="200px" alt=""></div>
+
+
+            </div>
+            
+            <% } %>
+
+       
+        <% if (locals.user) { %>
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                <% blogs.reverse().forEach(blog => { %>
+                    <div class="col">
+                        <div class="card">
+                            <img src="<%= blog.coverImageURL %>" class="card-img-top" alt="...">
+                            <div class="card-body" style="margin-top: 20px;">
+                                <h5 class="card-title"><%= blog.title %></h5>
+                                <a href="/blog/<%= blog._id %>" class="btn btn-primary" style="background-color: #007bff;">View</a>
+                            </div>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        <% } %>
     </div>
-  <% } else { %>
-    Sign in to see Opportunities you are missing!!
-  <% } %>
-</div>
+    <%-include('./partials/footer')%> 
 </body>
 </html>

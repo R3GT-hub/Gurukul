@@ -3,51 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homepage</title>
+    <title>Resources</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Madimi+One&family=Montserrat:wght@300;400;800&family=Playpen+Sans:wght@300&family=Poppins:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <style>
+        body{
+            font-family:"Madimi One";
+        }
+        .cardimg {
+            width: 80%;
+            height: 200px; /* Default height for all screen sizes */
+            padding: 10px;
+            margin: 0 auto;
+        }
+
+        .col:hover {
+            transform: scale(1.01); /* Corrected the property name */
+            transition-duration: 0.5s;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-img-top {
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            height: 200px;
+            width: 100%;
+        }
+
+        .card-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex-grow: 1;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+       
+    </style>
 </head>
 <body>
-<style>
-  .cardimg{
-    width: 80%;
-    height: 200px; /* Default height for all screen sizes */
-    /* margin: 10px auto; */
-    padding: 10px;
-    margin: 0 auto;
-  }
-
-  .col:hover{
-      scale: 1.01;
-      transition-duration: 0.5s;
-  }
-</style>
-<%-include('./partials/nav')%> 
-<div class="container mt-3">
-    <% if (user) { %>
-        <% if(resource && resource.length > 0){ %>
-            <div class="row row-cols-1 row-cols-lg-3 row-cols-md-2 g-3">
-                <% resource.forEach(r => { %>
-                    <div class="col mb-3">
-                        <div class="card mt-3">
-                            <img src="http://localhost:8000/<%= r.coverImageURL %>" class="card-img-top cardimg" alt="...">
-                            <hr>
-                            <div class="card-body">
-                                <h5 class="card-title"><%= r.title %></h5>
-                                <a href="/resource/<%= r._id %>" class="btn btn-primary">View</a>
+    <!-- Navbar -->
+    <%-include('./partials/nav')%> 
+<div style="margin-top: 60px;">
+    
+    <div class="container mt-3">
+        <% if (user) { %>
+            <h1>DSA, DEV and CP resources</h1>
+            <div style="border-radius: 20px;color:white; background: -webkit-linear-gradient(#212130, #39304A);; margin-top:40px ; padding:20px;align-items: center; display: flex; justify-content: space-around;">
+                <img src="https://www.proelevate.in/assets/DsaPractice/landingImage.svg" alt="">
+                <div style="width: 450px;"><h2>One stop Destionation for your first Job/Internship and Preparation</h2></div>
+            </div>
+            <div style="margin-top:30px ; display: flex; justify-content: space-between;">
+                <div>
+                    <img style="width: 200px; height: 200px;" src="https://play-lh.googleusercontent.com/9zvNJHedNg_6lOdwcodODMVsyeHKxuTIpnbBzomRGGZAp_vKVXnd5SlF8XZcXyGYjQ" alt="">
+                </div>
+                <div>
+                    <img style="width: 200px; height: 200px;" src="https://t3.ftcdn.net/jpg/04/74/35/24/360_F_474352498_oEylYJxhFUTHQe1c4lgfsyGtOyu0dGSa.jpg" alt="">
+                </div>
+                <div>
+                    <img style="width: 200px; height: 200px;" src="https://www.creativefabrica.com/wp-content/uploads/2021/09/03/CP-letter-logo-design-Graphics-16736858-1-1-580x387.jpg" alt="">
+                </div>
+            </div>
+            <% if(resource && resource.length > 0){ %>
+                <div class="row row-cols-1 row-cols-lg-3 row-cols-md-2 g-3">
+                    <% resource.forEach(r => { %>
+                        <div class="col mb-3">
+                            <div class="card mt-3">
+                                <img src="http://localhost:8000/<%= r.coverImageURL %>" class="card-img-top cardimg" alt="...">
+                                <hr>
+                                <div class="card-body">
+                                    <div style="display: flex;justify-content: space-between;">
+                                    <h5 class="card-title"><%= r.title %></h5>
+                                    <%if(r.tag==="CP"){%>
+                                    <button style="border: none;padding: 5px;width: 20%; color: white; background-color: rgb(250, 95, 95);border-radius:10px" disabled><%=r.tag%></button>
+                                    <%}%>
+                                    <%if(r.tag==="DSA"){%>
+                                        <button style=" border: none;padding: 5px;width: 20%; color: white;background-color: rgb(79, 131, 63); border-radius:10px" disabled><%=r.tag%></button>
+                                        <%}%>
+                                        <%if(r.tag==="DEV"){%>
+                                            <button style="border: none;padding: 5px;width: 20%; color: white;background-color: rgb(95, 167, 250); border-radius:10px"disabled><%=r.tag%></button>
+                                            <%}%>
+                                    
+                                </div>
+                                    <a href="/resource/<%= r._id %>" class="btn btn-primary">View</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                <% }) %>
-            </div>
-        <% } else { %>
-            <p>No resources available</p>
-        <% } %>
-    </div>
-  <% } else { %>
-    <p>Sign in to see Opportunities you are missing!!</p>
-  <% } %>
+                    <% }) %>
+                </div>
+            <% } else { %>
+                <p>No resources available</p>
+            <% } %>
+        </div>
+    <% } else { %>
+        <p>Sign in to see Opportunities you are missing!!</p>
+    <% } %>
 </div>
+<%-include('./partials/footer')%> 
 </body>
 </html>

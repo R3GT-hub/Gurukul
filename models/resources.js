@@ -13,6 +13,13 @@ const resourceSchema = new Schema({
         type:String,
         // required:false
     },
+    tag:{
+        type:String,
+        required:true,
+    },
+    sheetlink:{
+      type:String
+    },
     resourceLink:{
         type:String,
         required:true

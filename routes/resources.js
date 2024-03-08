@@ -48,23 +48,31 @@ router.get("/:id", async (req, res) => {
 
 router.post("/add-new-resource", resourceupload.fields([{ name: 'coverImage', maxCount: 1 }, { name: 'pdf', maxCount: 1 }]), async (req, res) => {
     try {
-        const { title, body, resourceLink } = req.body;
+        const { title,tag, body, resourceLink,sheetlink} = req.body;
 
-        // Check if files were uploaded
-        if (!req.files || !req.files['coverImage'] ) {
-            return res.status(400).send('No files were uploaded.');
+        // Check if cover image file was uploaded
+        if (!req.files || !req.files['coverImage']) {
+            return res.status(400).send('Cover image is required.');
         }
 
         const coverImageFile = req.files['coverImage'][0];
-        const pdfFile = req.files['pdf'][0];
+        let pdfFileUrl = null;
+
+        // Check if PDF file was uploaded
+        if (req.files && req.files['pdf']) {
+            const pdfFile = req.files['pdf'][0];
+            pdfFileUrl = `resourcesuploads/${pdfFile.filename}`;
+        }
 
         const resource = await Resource.create({
             body,
             title,
+            tag,
+            sheetlink,
             resourceLink,
             createdBy: req.user._id,
             coverImageURL: `resourcesuploads/${coverImageFile.filename}`,
-            pdf: `resourcesuploads/${pdfFile.filename}`
+            pdf: pdfFileUrl
         });
 
         console.log('Resource post created:', resource);
@@ -74,6 +82,7 @@ router.post("/add-new-resource", resourceupload.fields([{ name: 'coverImage', ma
         return res.status(500).send('Error creating resource post: ' + error.message);
     }
 });
+
 
 
 module.exports = router;

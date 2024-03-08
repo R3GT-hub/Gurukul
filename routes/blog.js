@@ -1,38 +1,54 @@
 const { Router } = require("express");
 const multer = require('multer');
-const  Blog=require("../models/blog");
+const Blog = require("../models/blog");
+const { checkForAuthenticationCookie } = require('../middleware/authentication');
 const router = Router();
 const path = require('path');
 
-// const storage = multer.diskStorage({
-//     destination: function (req, file, cb) {
-//         cb(null, path.resolve(`./public/uploads`))
-//     },
-//     filename: function (req, file, cb) {
-//         const filename = `${Date.now()}-${file.originalname}`;
-//         cb(null, filename);
-//     },
-// });
 const upload = multer({ dest: path.resolve(`./public/uploads`) })
 
-// const upload = multer({ storage: storage });
+router.use(checkForAuthenticationCookie('token'));
 
 router.get("/add-new", (req, res) => {
-    
+    // Check if user is authenticated
+    if (!req.user) {
+        return res.status(401).send('Non authorized user').redirect('/user/signin');
+    }
+    if(req.user.fullName==="Saransh Sharma"){
     res.render('addblog', {
         user: req.user,
     });
+}
+else{
+    return res.status(401).send('Non authorized user').redirect('/user/signin');
+
+}
 });
 
-router.get("/:id",async(req,res)=>{
-    const blog=await Blog.findById(req.params.id).populate("createdBy");
-    return res.render("blog",{
-        user:req.user,
-        blog:blog,
-    })
-})
+router.get("/:id", async (req, res) => {
+    try {
+        // Check if user is authenticated
+        if (!req.user) {
+            return res.status(401).send('Non authorized user').redirect('/user/signin');
+
+        }
+
+        const blog = await Blog.findById(req.params.id).populate("createdBy");
+        return res.render("blog", {
+            user: req.user,
+            blog: blog,
+        });
+    } catch (error) {
+        console.error('Error fetching blog:', error);
+        res.status(500).send('Internal server error').redirect('user/signin');
+    }
+});
+
 router.post("/", upload.single("coverImage"), async (req, res) => {
     try {
+        if (!req.user) {
+            return res.status(401).send('Unauthorized'); // Ensure user is authenticated
+        }
         if (!req.file) {
             return res.status(400).send('No files were uploaded.');
         }
@@ -42,6 +58,7 @@ router.post("/", upload.single("coverImage"), async (req, res) => {
             body,
             title,
             jobLink,
+            expireAfterSeconds: 3600*24*5 ,
             createdBy: req.user._id,
             coverImageURL: `uploads/${req.file.filename}`
         });
@@ -52,7 +69,6 @@ router.post("/", upload.single("coverImage"), async (req, res) => {
         console.error('Error creating blog post:', error);
         return res.status(500).send('Internal server error');
     }
-    
 });
 
 module.exports = router;

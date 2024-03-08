@@ -3,9 +3,14 @@
 <head>
     <title>Contact Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Madimi+One&family=Montserrat:wght@300;400;800&family=Playpen+Sans:wght@300&family=Poppins:wght@500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Montserrat:wght@300;400;800&family=Playpen+Sans:wght@300&family=Poppins:wght@500&display=swap" rel="stylesheet">
     <style>
         /* Custom styling */
         body {
+            font-family:"Madimi One";
+
             background-color: #f8f9fa;
         }
         .container {
@@ -31,12 +36,12 @@
 <%-include('./partials/nav')%>
 <div class="container mt-5">
     <h2 class="text-center mb-4">Contact Admin</h2>
-    <form action="https://getform.io/f/vbmKBAeY" method="post" enctype="multipart/form-data">
+    <form action="https://usebasin.com/f/1ec4fad2ce12" method="post" enctype="multipart/form-data">
         <div class="mb-3">
-            <input type="text" name="name" placeholder="Enter your name" class="form-control">
+            <input type="text" name="name" placeholder="Enter your name" class="form-control" value="<%=user.fullName%>" >
         </div>
         <div class="mb-3">
-            <input type="email" name="email" placeholder="Enter your email" class="form-control">
+            <input type="email" name="email" placeholder="Enter your email" class="form-control" value="<%=user.email%>" >
         </div>
         <div class="mb-3">
             <textarea name="message" rows="10" class="form-control" placeholder="Enter your message"></textarea>
