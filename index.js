@@ -37,3 +37,5 @@ app.use('/blog',blogRoute);
 app.use('/resource',resourceRoute);
 
 app.listen(PORT,()=>console.log('server started at port 8000'));
+
+module.exports = app;
