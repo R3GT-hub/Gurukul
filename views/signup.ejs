@@ -17,6 +17,8 @@
             box-sizing: border-box;
         }
         .signup-container {
+          width: 100%;
+         
             display: flex;
             justify-content: center;
             align-items: center;
@@ -45,7 +47,9 @@
 <body>
 
 <%-include('./partials/nav')%> 
-<div class="container signup-container">
+<div class="container signup-container" style="display: flex;flex-wrap: wrap; flex-direction: row; background-image: url('/uploads/background.png'); background-repeat: no-repeat;
+background-size: cover; ">
+
     <div class="form-container">
         <form action="/user/signup" method="post" onsubmit="return validateForm()">
             <div class="mb-3">

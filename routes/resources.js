@@ -13,13 +13,13 @@ const resourceupload = multer({ dest: path.resolve('./public/resourcesuploads') 
 router.get("/", async(req, res) => {
     try {
         const resources = await Resource.find().populate("createdBy");
-        console.log(resources);
+        // console.log(resources);
         res.render('resources', {
             user: req.user,
             resource: resources,
         });
     } catch (error) {
-        console.error('Error fetching resources:', error);
+        // console.error('Error fetching resources:', error);
         return res.status(500).send('Error fetching resources: ' + error.message);
     }
 });
@@ -41,7 +41,7 @@ router.get("/:id", async (req, res) => {
             resource: resource,
         });
     } catch (error) {
-        console.error('Error fetching resource:', error);
+        // console.error('Error fetching resource:', error);
         res.status(500).send('Internal server error');
     }
 });
@@ -75,10 +75,10 @@ router.post("/add-new-resource", resourceupload.fields([{ name: 'coverImage', ma
             pdf: pdfFileUrl
         });
 
-        console.log('Resource post created:', resource);
+        // console.log('Resource post created:', resource);
         return res.redirect(`/resource/${resource._id}`);
     } catch (error) {
-        console.error('Error creating resource post:', error);
+        // console.error('Error creating resource post:', error);
         return res.status(500).send('Error creating resource post: ' + error.message);
     }
 });

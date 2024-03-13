@@ -39,7 +39,7 @@ router.get("/:id", async (req, res) => {
             blog: blog,
         });
     } catch (error) {
-        console.error('Error fetching blog:', error);
+        // console.error('Error fetching blog:', error);
         res.status(500).send('Internal server error').redirect('user/signin');
     }
 });
@@ -58,15 +58,15 @@ router.post("/", upload.single("coverImage"), async (req, res) => {
             body,
             title,
             jobLink,
-            expireAfterSeconds: 3600*24*5 ,
+            
             createdBy: req.user._id,
             coverImageURL: `uploads/${req.file.filename}`
         });
 
-        console.log('Blog post created:', blog);
+        // console.log('Blog post created:', blog);
         return res.redirect(`/blog/${blog._id}`);
     } catch (error) {
-        console.error('Error creating blog post:', error);
+        // console.error('Error creating blog post:', error);
         return res.status(500).send('Internal server error');
     }
 });

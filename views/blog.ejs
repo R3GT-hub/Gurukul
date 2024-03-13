@@ -78,6 +78,7 @@
         .job-link {
             margin-top: 10px; /* Spacing from the top */
         }
+        
     </style>
 </head>
 <body>
@@ -86,7 +87,7 @@
         <h1><%= blog.title %></h1>
         <img src="http://localhost:8000/<%= blog.coverImageURL %>" class="card-img-top blog-image" alt="Cover Image">
         <div class="content mt-3">
-            <pre style="font-family: 'Courier New', Courier, monospace;"><%= blog.body %></pre>
+            <pre style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;"><%= blog.body %></pre>
             <% if(blog.jobLink) { %>
                 <p class="job-link">Job Link: <a href="<%= blog.jobLink %>">Click here to apply ></a></p>
             <% } %>

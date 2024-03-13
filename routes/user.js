@@ -54,7 +54,7 @@ router.get('/contactadmin', async (req, res) => {
             return res.redirect('/user/signin');
         }
     } catch (error) {
-        console.error('Error in contactadmin route:', error);
+        // console.error('Error in contactadmin route:', error);
         res.status(500).send('Internal server error');
     }
 });
