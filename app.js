@@ -9,7 +9,7 @@ const resourceRoute=require('./routes/resources');
 
 const { checkForAuthenticationCookie } = require("./middleware/authentication");
 const app=express();
-const PORT=process.env.PORT || 8000;
+const PORT=process.env.PORT || 3000;
 app.set("view engine","ejs");
 app.set("views",path.resolve("./views"));
 
@@ -37,6 +37,6 @@ app.use('/user',userRoute);
 app.use('/blog',blogRoute);
 app.use('/resource',resourceRoute);
 
-app.listen(PORT,()=>console.log('server started at port 8000'));
+app.listen(PORT,()=>console.log('server started at port 3000'));
 
 module.exports = app;

@@ -114,16 +114,19 @@
     <!-- https://img.freepik.com/free-vector/blue-curve-background_361591-1370.jpg -->
     <div
       class=""
-      style="
+       style="
+        background-image: url('/uploads/background.png');
+        background-repeat: no-repeat;
+        background-size: cover;
         margin-top: 0;
-      "
+      " 
     >
       <div class="container mt-5">
         <% if (user && user.fullName) { %>
         <h1 class="mb-4" style="font-weight: 600; font-family: Madimi One">
           Welcome,<span style="color: #007bff"> <%= user.fullName %> </span>!
         </h1>
-        <!-- <div
+        <div
         class="fourimages"
           style="
             display: flex;
@@ -164,7 +167,7 @@
               alt=""
             />
           </div>
-        </div> -->
+        </div>
         <div>
           <div
             style="
