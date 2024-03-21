@@ -64,7 +64,7 @@ router.post("/", upload.single("coverImage"), async (req, res) => {
         });
 
         // console.log('Blog post created:', blog);
-        return res.redirect(`/`);
+        return res.redirect('/');
     } catch (error) {
         // console.error('Error creating blog post:', error);
         return res.status(500).send('Internal server error');
