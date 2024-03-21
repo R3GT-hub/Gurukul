@@ -33,6 +33,19 @@ app.get('/', async (req, res) => {
         res.status(500).send("Internal Server Error");
     }
 });
+app.get('/blog', async (req, res) => {
+    try {
+        const allBlogs = await Blog.find({});
+        // console.log(req.user);
+        res.render("home", {
+            user: req.user,
+            blogs: allBlogs
+        });
+    } catch (error) {
+        // console.error("Error:", error);
+        res.status(500).send("Internal Server Error");
+    }
+});
 app.use('/user',userRoute);
 app.use('/blog',blogRoute);
 app.use('/resource',resourceRoute);
