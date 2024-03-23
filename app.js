@@ -33,16 +33,16 @@ app.get('/', async (req, res) => {
         res.status(500).send("Internal Server Error");
     }
 });
-app.get('/blog', async (req, res) => {
-    try {
-        const allBlogs = await Blog.find({});
-        // console.log(req.user);
-        res.status(200).send("added blog");
-    } catch (error) {
-        // console.error("Error:", error);
-        res.status(500).send("Internal Server Error from /blog");
-    }
-});
+// app.get('/blog', async (req, res) => {
+//     try {
+//         const allBlogs = await Blog.find({});
+//         // console.log(req.user);
+//         res.status(200).send("added blog");
+//     } catch (error) {
+//         // console.error("Error:", error);
+//         res.status(500).send("Internal Server Error from /blog");
+//     }
+// });
 app.use('/user',userRoute);
 app.use('/blog',blogRoute);
 app.use('/resource',resourceRoute);
