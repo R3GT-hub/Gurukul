@@ -37,7 +37,7 @@ app.get('/blog', async (req, res) => {
     try {
         const allBlogs = await Blog.find({});
         // console.log(req.user);
-        res.render("home", {
+        res.redirect("/", {
             user: req.user,
             blogs: allBlogs
         });
